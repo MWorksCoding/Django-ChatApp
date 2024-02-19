@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% load static %}
+    <link rel="icon" type="image/URL-icon"  href="{% static 'img/chat.png' %}">
+    <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    {% comment %} material lite : https://getmdl.io/started/index.html {% endcomment %}
+    {% comment %} die Variable request kann mann immer verwenden {% endcomment %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css" />
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <title>Chatroom</title>
+  </head>
+ <body> 
+   <!-- Uses a header that scrolls with the text, rather than staying
+  locked at the top -->
+  <div class="mdl-layout mdl-js-layout">
+    <header class="mdl-layout__header mdl-layout__header--scroll">
+      <div class="mdl-layout__header-row" style="display: flex; align-items: center">
+        <!-- Title -->
+        {% if request.user.is_authenticated %}
+        <span class="mdl-layout-title">Welcome, {{ request.user.username }}</span>
+        {% else %}
+        <span class="mdl-layout-title"><a href="/login"><b>Welcome to Django Chat App</b></a></span>
+        {% endif %}
+        <!-- Add spacer, to align navigation to the right -->
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation mdl-layout--large-screen-only">
+            <a class="mdl-navigation__link" href="/chat/">Chat</a>
+            <a class="mdl-navigation__link" href="/admin/">Admin</a>
+            {% if request.user.is_authenticated %}
+           {% comment %} <a  class="mdl-navigation__link" href="{% url 'admin:logout' %}">Logout</a> {% endcomment %}
+           {% comment %} <a  class="mdl-navigation__link" href="{% url 'admin:logout' %}?next={% url 'index' %}">Logout</a> {% endcomment %}
+            {% endif %}
+      </div>
+    </header>
+    <div class="mdl-layout__drawer">
+      <span class="mdl-layout-title">Django Chat App</span>
+      <nav class="mdl-navigation">
+        <a class="mdl-navigation__link" href="/chat/">Chat</a>
+        <a class="mdl-navigation__link" href="/admin/">Admin</a>
+      </nav>
+    </div>
+    <main class="mdl-layout__content">
+        {% block login%}
+        {% endblock %}
+
+      <div class="page-content">
+
+        {% block content%}
+         {% endblock %}
+        <div>
+
+
+    </main>
+  </div>
+  </body>
+</html>

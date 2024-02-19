@@ -1,0 +1,37 @@
+html {
+  scroll-behavior: smooth;
+  
+}
+
+body {
+  min-height: 100vh;
+  font-family: 'Roboto', sans-serif;
+}
+
+.mdl-textfield__input{
+  line-height: 2.5 !important;
+}
+
+.mdl-layout__content{
+  padding: 32px 32px 32px 32px;
+}
+
+@media screen and (max-width:1200px) {
+
+}
+
+@media screen and (max-width:1000px) {
+ 
+}
+
+@media screen and (max-width:800px) {
+
+}
+
+@media screen and (max-width:600px) {
+ 
+}
+
+@media screen and (max-width:400px) {
+
+}
