@@ -1,0 +1,112 @@
+{% extends "master.html" %} {% block register%}
+<div class="mdl-card-center">
+  <h4>Make the most of your programmer life</h4>
+  {% if registrationSucceded %}
+  <script>
+    setTimeout(function () {
+      window.location.href = "/login/";
+    }, 10000);
+  </script>
+  <p>
+    Thank you for registering, please log in again.<br />
+    You will be redirected to the login page in 10 seconds.
+  </p>
+  <div
+    class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"
+  ></div>
+  {%else%} {% if usernameAlreadyExists %}
+  <p class="warning-message">
+    Username already exits, please choose another one
+  </p>
+  {% endif %} {% if emailAlreadyExists %}
+  <p class="warning-message">
+    Email adress is already registered, did you forget your password?
+    <a href="/password_reset/"><b>Click here</b></a>
+  </p>
+  {% endif %} {% if passwordMismatch %}
+  <p class="warning-message">Both passwords do not match, please try again</p>
+  {% endif %}
+
+  <div class="demo-card-square mdl-card mdl-shadow--2dp mdl-card-center">
+    <div class="mdl-card__title mdl-card--expand">
+      <h2 class="mdl-card__title-text">Join now</h2>
+    </div>
+    <form method="POST" class="mdl-card-center">
+      {% csrf_token %}
+      <input type="hidden" name="redirect" value="{{redirect}}" />
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <div>
+          <input
+            class="mdl-textfield__input"
+            name="username"
+            type="text"
+            id="signup-username"
+            autocomplete="off"
+            value="{{ request.POST.username }}"
+          />
+        </div>
+        <label class="mdl-textfield__label" for="signup-username"
+          >Username</label
+        >
+      </div>
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <div>
+          <input
+            class="mdl-textfield__input"
+            name="email"
+            type="email"
+            id="signup-email"
+            autocomplete="off"
+            value="{{ request.POST.email }}"
+          />
+        </div>
+        <label class="mdl-textfield__label" for="signup-email">Email</label>
+      </div>
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <div>
+          <input
+            class="mdl-textfield__input"
+            name="password"
+            type="password"
+            id="signup-password"
+            autocomplete="off"
+            value="{{ request.POST.username }}"
+          />
+        </div>
+        <label class="mdl-textfield__label" for="signup-password"
+          >Password</label
+        >
+      </div>
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <div>
+          <input
+            class="mdl-textfield__input"
+            name="confirm_password"
+            type="password"
+            id="signup-confirm-password"
+            autocomplete="new-password"
+            value="{{ request.POST.confirm_password }}"
+          />
+        </div>
+        <label class="mdl-textfield__label" for="signup-confirm-password"
+          >Confirm password</label
+        >
+      </div>
+
+      <div class="mdl-card__actions mdl-card--border mdl-card-center">
+        <div>
+          <button
+            class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+            style="margin: 16px 0 0px"
+          >
+            Join
+          </button>
+        </div>
+      </div>
+    </form>
+    <p class="signin-signup">
+      Already on Django Chat App? <a href="/login/"><b>Sign in</b></a>
+    </p>
+  </div>
+</div>
+{% endif %} {% endblock %}
