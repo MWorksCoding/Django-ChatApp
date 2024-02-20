@@ -43,6 +43,7 @@
             id="signup-username"
             autocomplete="off"
             value="{{ request.POST.username }}"
+            required
           />
         </div>
         <label class="mdl-textfield__label" for="signup-username"
@@ -58,6 +59,7 @@
             id="signup-email"
             autocomplete="off"
             value="{{ request.POST.email }}"
+            required
           />
         </div>
         <label class="mdl-textfield__label" for="signup-email">Email</label>
@@ -71,6 +73,7 @@
             id="signup-password"
             autocomplete="off"
             value="{{ request.POST.username }}"
+            required
           />
         </div>
         <label class="mdl-textfield__label" for="signup-password"
@@ -86,6 +89,7 @@
             id="signup-confirm-password"
             autocomplete="new-password"
             value="{{ request.POST.confirm_password }}"
+            required
           />
         </div>
         <label class="mdl-textfield__label" for="signup-confirm-password"
@@ -105,6 +109,10 @@
       </div>
     </form>
     <p class="signin-signup">
+      Forgot Password?
+      <a href="/password_reset/"><b>Click here</b></a>
+    </p>
+    <p>
       Already on Django Chat App? <a href="/login/"><b>Sign in</b></a>
     </p>
   </div>

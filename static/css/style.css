@@ -1,6 +1,6 @@
 html {
   scroll-behavior: smooth;
-  
+
 }
 
 body {
@@ -8,28 +8,28 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
-.mdl-textfield__input{
+.mdl-textfield__input {
   line-height: 2.5 !important;
 }
 
-.mdl-layout__content{
-  padding: 32px 32px 32px 32px;
+.mdl-layout__content {
+  /* padding: 32px 32px 32px 32px; */
 }
 
 .signin-signup {
-  margin: 16px 0 16px 
+  margin: 16px 0 16px
 }
 
 .mdl-card {
   border-radius: 6px !important
 }
 
-.warning-message{
+.warning-message {
   color: red;
 }
 
 .mdl-spinner {
-  margin: 16px 0 16px 0 !important; 
+  margin: 16px 0 16px 0 !important;
 }
 
 .mdl-card-center {
@@ -38,26 +38,56 @@ body {
   align-items: center;
 }
 
-.mdl-layout__header-row{
-  padding: 0 40px 0 40px !important; 
+.mdl-layout__header-row {
+  padding: 0 40px 0 40px !important;
 }
 
-@media screen and (max-width:1200px) {
-
+.mdl-card-user {
+  min-height: unset !important;
+  background-color: #3f51b5 !important;
+  display: flex !important;
+  justify-content: flex-end !important;
+  position: relative !important;
+  left: calc(100vw - 374px) !important;
+  margin: 16px !important;
 }
 
-@media screen and (max-width:1000px) {
- 
+.mdl-card-not-user {
+  min-height: unset !important;
+  background-color: rgb(255,64,129) !important;
+  display: flex !important;
+  justify-content: flex-end !important;
+  position: relative !important;
+  margin: 16px !important;
 }
 
-@media screen and (max-width:800px) {
-
+.mdl-card-user-text{
+  background-color: #7986cb !important;
 }
 
-@media screen and (max-width:600px) {
- 
+.mdl-card-not-user-text{
+  background-color: #f06292 !important;
 }
 
-@media screen and (max-width:400px) {
-
+.input-send-div {
+  position: relative;
+  bottom: 0;
 }
+
+.mdl-card__supporting-text {
+  color: white !important;
+}
+
+.mdl-card__actions{
+  text-align: end !important;
+}
+
+@media screen and (max-width:1200px) {}
+
+@media screen and (max-width:1000px) {}
+
+@media screen and (max-width:800px) {}
+
+@media screen and (max-width:600px) {}
+
+@media screen and (max-width:400px) {}

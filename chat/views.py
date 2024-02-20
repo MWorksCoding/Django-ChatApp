@@ -5,8 +5,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
-# wichtig:  09 - Datenbank Objekt erstellen
-# Create your views here.
+
+
 @login_required(login_url='/login/')#redirect if not logged in
 def index(request):    
     if request.method == 'POST':
@@ -56,7 +56,6 @@ def create_user_view(request):
     return render(request, 'register/signup.html')
 
 
-
 def password_reset(request):
     if request.method == 'POST':
         password_reset_email = request.POST.get('email') 
@@ -73,7 +72,3 @@ def password_reset(request):
 def sign_out(request):
     logout(request)
     return render(request, 'auth/sign_out.html')
-    
-
-#mworkscoding
-#mworkscoding@gmail.com
