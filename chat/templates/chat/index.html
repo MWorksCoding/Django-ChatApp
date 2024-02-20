@@ -1,54 +1,53 @@
-{% extends "master.html" %} {% block content%} {% if
-request.user.is_authenticated %} {% for message in messages%} {% if
-message.author == request.user %}
-<div class="demo-card-square mdl-card mdl-shadow--2dp mdl-card-user">
-  <div class="mdl-card__supporting-text mdl-card-user-text">
-    {{ message.text }}
-  </div>
-  <div class="mdl-card__actions mdl-card--border">
-    <span class="mdl-card__supporting-text">
-      {{ message.author.username }} on {{message.created_at}}</span
-    >
-  </div>
-</div>
-{% else %}
-<div class="demo-card-square mdl-card mdl-shadow--2dp mdl-card-not-user">
-  <div class="mdl-card__supporting-text mdl-card-not-user-text">
-    {{ message.text }}
-  </div>
-  <div class="mdl-card__actions mdl-card--border">
-    <span class="mdl-card__supporting-text">
-      {{ message.author.username }} on {{message.created_at}}</span
-    >
-  </div>
-</div>
-{% endif %} {% endfor %}
-<div class="mdl-card__actions mdl-card--border mdl-card-center input-send-div">
-  <form action="/chat/" method="POST">
-    {% csrf_token %}
-    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-      <input
-        class="mdl-textfield__input"
-        name="textmessage"
-        type="text"
-        id="sample3"
-      />
-      <label class="mdl-textfield__label" for="sample3">Text...</label>
+{% extends "master.html" %} 
+{% block content %}
+  {% if request.user.is_authenticated %}
+    {% for message in messages %}
+      {% if message.author == request.user %}
+        <div class="demo-card-square mdl-card mdl-shadow--2dp mdl-card-user">
+          <div class="mdl-card__supporting-text mdl-card-user-text">
+            {{ message.text }}
+          </div>
+          <div class="mdl-card__actions mdl-card--border">
+            <span class="mdl-card__supporting-text">
+              {{ message.author.username }} on {{ message.created_at }}
+            </span>
+          </div>
+        </div>
+      {% else %}
+        <div class="demo-card-square mdl-card mdl-shadow--2dp mdl-card-not-user">
+          <div class="mdl-card__supporting-text mdl-card-not-user-text">
+            {{ message.text }}
+          </div>
+          <div class="mdl-card__actions mdl-card--border">
+            <span class="mdl-card__supporting-text">
+              {{ message.author.username }} on {{ message.created_at }}
+            </span>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+    <div class="mdl-card__actions mdl-card--border mdl-card-center input-send-div">
+      <form action="/chat/" method="POST">
+        {% csrf_token %}
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input
+            class="mdl-textfield__input"
+            name="textmessage"
+            type="text"
+            id="sample3"
+          />
+          <label class="mdl-textfield__label" for="sample3">Text...</label>
+        </div>
+        <button
+          class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+        >
+          Send message
+        </button>
+      </form>
     </div>
-    <button
-      class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
-    >
-      Send message
-    </button>
-  </form>
-</div>
-{% else %}
-<h4>
-  You are not logged in
-  <h4>
-    <p>
-      Please log in <a href="/login/"><b>here</b></a> to read your Messages
+  {% else %}
+    <p class="signin-signup">
+      You are not logged in. Please log in <a href="/login/"><b>here</b></a> to read your Messages
     </p>
-    <p>{% endif %} {% endblock %}</p>
-  </h4>
-</h4>
+  {% endif %}
+{% endblock %}
