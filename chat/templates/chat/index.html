@@ -45,8 +45,8 @@
         formdata.append("csrfmiddlewaretoken", token);
         try{
           let formattedDate= getFormattedDate();
-          console.log('formattedDate' , formattedDate)
-          messageContainer.innerHTML += `
+          console.log('formattedDate' , formattedDate);
+          messageContainer += `
           <div class="demo-card-square mdl-card mdl-shadow--2dp mdl-card-user" id="deleteMessage">
             <div class="mdl-card__supporting-text mdl-card-user-text">
               <i>${ messageField.value}</i>
@@ -59,8 +59,7 @@
           </div>
           `;
 
-
-          console.log('messageContainer.innerHTML' , messageContainer.innerHTML)
+          console.log('messageContainer' , messageContainer);
           {% comment %} Fetch, what comes from the server {% endcomment %}
           let response = await fetch('/chat/', {
             method: 'POST',
@@ -76,10 +75,10 @@
           console.log('message', message);
           console.log('author ', author );
 
-
+          console.log('document.getElementById(deleteMessage)', document.getElementById('deleteMessage') );
 
           document.getElementById('deleteMessage').remove();
-          messageContainer.innerHTML += `
+          messageContainer += `
           <div class="demo-card-square mdl-card mdl-shadow--2dp mdl-card-user">
             <div class="mdl-card__supporting-text mdl-card-user-text">
               <i>${message}</i>
