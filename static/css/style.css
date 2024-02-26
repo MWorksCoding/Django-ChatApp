@@ -8,6 +8,14 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+/* .mdl-layout {
+  height: calc(100vh - 115px) !important;
+} */
+
+.chat-content{
+  height: calc(100vh - 115px) !important;
+}
+
 .mdl-textfield__input {
   line-height: 2.5 !important;
 }
@@ -34,6 +42,12 @@ body {
   align-items: center;
 }
 
+.mdl-card-center-two-buttons{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .mdl-layout__header-row {
   padding: 0 40px 0 40px !important;
 }
@@ -50,31 +64,33 @@ body {
 
 .mdl-card-not-user {
   min-height: unset !important;
-  background-color: rgb(255,64,129) !important;
+  background-color: rgb(255, 64, 129) !important;
   display: flex !important;
   justify-content: flex-end !important;
   position: relative !important;
   margin: 16px !important;
 }
 
-.mdl-card-user-text{
+.mdl-card-user-text {
   background-color: #7986cb !important;
 }
 
-.mdl-card-not-user-text{
+.mdl-card-not-user-text {
   background-color: #f06292 !important;
 }
 
 .input-send-div {
-  position: relative;
+  position: sticky;
   bottom: 0;
+  background-color: white !important;
+  z-index: 1;
 }
 
 .mdl-card__supporting-text {
   color: white !important;
 }
 
-.mdl-card__actions{
+.mdl-card__actions {
   text-align: end !important;
 }
 

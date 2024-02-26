@@ -1,53 +1,128 @@
-{% extends "master.html" %} 
-{% block content %}
-  {% if request.user.is_authenticated %}
-    {% for message in messages %}
-      {% if message.author == request.user %}
-        <div class="demo-card-square mdl-card mdl-shadow--2dp mdl-card-user">
-          <div class="mdl-card__supporting-text mdl-card-user-text">
-            {{ message.text }}
-          </div>
-          <div class="mdl-card__actions mdl-card--border">
-            <span class="mdl-card__supporting-text">
-              {{ message.author.username }} on {{ message.created_at }}
-            </span>
-          </div>
-        </div>
-      {% else %}
-        <div class="demo-card-square mdl-card mdl-shadow--2dp mdl-card-not-user">
-          <div class="mdl-card__supporting-text mdl-card-not-user-text">
-            {{ message.text }}
-          </div>
-          <div class="mdl-card__actions mdl-card--border">
-            <span class="mdl-card__supporting-text">
-              {{ message.author.username }} on {{ message.created_at }}
-            </span>
-          </div>
-        </div>
-      {% endif %}
-    {% endfor %}
-    <div class="mdl-card__actions mdl-card--border mdl-card-center input-send-div">
-      <form action="/chat/" method="POST">
-        {% csrf_token %}
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <input
-            class="mdl-textfield__input"
-            name="textmessage"
-            type="text"
-            id="sample3"
-          />
-          <label class="mdl-textfield__label" for="sample3">Text...</label>
-        </div>
-        <button
-          class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
-        >
-          Send message
-        </button>
-      </form>
+{% extends "master.html" %} {% block content %}
+<div class="chat-content">
+  {% if request.user.is_authenticated %} {% for message in messages %} 
+  {% if message.author == request.user %}
+  <div id="messageContainer">
+    <div class="demo-card-square mdl-card mdl-shadow--2dp mdl-card-user">
+      <div class="mdl-card__supporting-text mdl-card-user-text">
+        {{ message.text }}
+      </div>
+      <div class="mdl-card__actions mdl-card--border">
+        <span class="mdl-card__supporting-text">
+          {{ message.author.username }} on {{ message.created_at }}
+        </span>
+      </div>
     </div>
+  </div>
   {% else %}
-    <p class="signin-signup">
-      You are not logged in. Please log in <a href="/login/"><b>here</b></a> to read your Messages
-    </p>
-  {% endif %}
-{% endblock %}
+  <div class="demo-card-square mdl-card mdl-shadow--2dp mdl-card-not-user">
+    <div class="mdl-card__supporting-text mdl-card-not-user-text">
+      {{ message.text }}
+    </div>
+    <div class="mdl-card__actions mdl-card--border">
+      <span class="mdl-card__supporting-text">
+        {{ message.author.username }} on {{ message.created_at }}
+      </span>
+    </div>
+  </div>
+
+  {% endif %} {% endfor %}
+  <script>
+
+      function getFormattedDate() {
+        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        const now = new Date();
+        const month = months[now.getMonth()];
+        const day = now.getDate();
+        const year = now.getFullYear();
+
+        return `${month}. ${day}, ${year}`;
+    }
+      async function sendMessage() {
+        let formdata = new FormData();
+        let token = "{{ csrf_token }}";
+        formdata.append("textmessage", messageField.value);
+        formdata.append("csrfmiddlewaretoken", token);
+        try{
+          let formattedDate= getFormattedDate();
+          console.log('formattedDate' , formattedDate)
+          messageContainer.innerHTML += `
+          <div class="demo-card-square mdl-card mdl-shadow--2dp mdl-card-user" id="deleteMessage">
+            <div class="mdl-card__supporting-text mdl-card-user-text">
+              <i>${ messageField.value}</i>
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+              <span class="mdl-card__supporting-text">
+                {{ request.user.username }} on [${formattedDate}]
+              </span>
+            </div>
+          </div>
+          `;
+
+
+          console.log('messageContainer.innerHTML' , messageContainer.innerHTML)
+          {% comment %} Fetch, what comes from the server {% endcomment %}
+          let response = await fetch('/chat/', {
+            method: 'POST',
+            body: formdata
+          });
+
+          let json = await response.json();
+          console.log('data', json);
+          let jsonObject = JSON.parse(json);
+          console.log('jsonObject', jsonObject);
+          let message = jsonObject.fields.text;
+          let author = jsonObject.fields.author;
+          console.log('message', message);
+          console.log('author ', author );
+
+
+
+          document.getElementById('deleteMessage').remove();
+          messageContainer.innerHTML += `
+          <div class="demo-card-square mdl-card mdl-shadow--2dp mdl-card-user">
+            <div class="mdl-card__supporting-text mdl-card-user-text">
+              <i>${message}</i>
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+              <span class="mdl-card__supporting-text">
+                ${author} on [${formattedDate}]
+              </span>
+            </div>
+          </div>
+          `;
+          console.log('formattedDate' , formattedDate)
+        } catch (error) {
+          console.error('An Error occured ', error)
+      }
+      }
+  </script>
+
+  <div
+    class="mdl-card__actions mdl-card--border mdl-card-center input-send-div"
+  >
+    <form onsubmit="sendMessage(); return false;" method="POST">
+      {% csrf_token %}
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input
+          class="mdl-textfield__input"
+          name="textmessage"
+          type="text"
+          id="messageField"
+        />
+        <label class="mdl-textfield__label" for="messageField">Text...</label>
+      </div>
+      <button
+        class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+      >
+        Send message
+      </button>
+    </form>
+  </div>
+  {% else %}
+  <p class="signin-signup mdl-card-center">
+    You are not logged in. Please log in <a href="/login/"><b>here</b></a> to
+    read your Messages
+  </p>
+</div>
+{% endif %} {% endblock %}

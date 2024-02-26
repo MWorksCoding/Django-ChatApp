@@ -3,7 +3,7 @@
 {% if request.user.is_authenticated %}
 
 
-<p>You are already logged in. <a href="/chat/"><b>Click here</b></a> to read you messages</p>
+<p class="signin-signup mdl-card-center">You are already logged in. <a href="/chat/"><b>Click here</b></a> to read you messages</p>
 
 {% else %}
 <div class="mdl-card-center">
@@ -46,13 +46,21 @@
           >Password</label
         >
       </div>
-      <div class="mdl-card__actions mdl-card--border mdl-card-center">
+      <div class="mdl-card__actions mdl-card--border mdl-card-center-two-buttons">
         <div>
           <button
             class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
             style="margin: 16px 0 0px"
           >
             Login
+          </button>
+        </div>
+        <div>
+          <button
+            class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+            style="margin: 16px 0 0px"
+          >
+            Guest-Login
           </button>
         </div>
       </div>
