@@ -20,17 +20,39 @@ def index(request):
     chatMessages = Message.objects.filter(chat__id=1)
     return render(request, 'chat/index.html', {'messages': chatMessages })
 
+# def login_view(request):
+#     redirect = request.GET.get('next')
+#     if request.method == 'POST':
+#         user = authenticate(username=request.POST.get('username') , password=request.POST.get('password'))
+#         if user :
+#             login(request , user)
+#             return HttpResponseRedirect('/chat/')
+#             # return HttpResponseRedirect(request.POST.get('redirect'))
+#         else:
+#             return render(request, 'auth/login.html', {'wrongPassword': True, 'redirect' : redirect})
+#     return render(request, 'auth/login.html', {'redirect' : redirect})
+
 def login_view(request):
-    redirect = request.GET.get('next')
+    redirect_to = request.GET.get('next', '/chat/')  # Default redirect URL after login
+
     if request.method == 'POST':
-        user = authenticate(username=request.POST.get('username') , password=request.POST.get('password'))
-        if user :
-            login(request , user)
-            return HttpResponseRedirect('/chat/')
-            # return HttpResponseRedirect(request.POST.get('redirect'))
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        
+        if username == 'guest' and password == '123456789!':
+            # Perform guest login
+            user = authenticate(username=username, password=password)
         else:
-            return render(request, 'auth/login.html', {'wrongPassword': True, 'redirect' : redirect})
-    return render(request, 'auth/login.html', {'redirect' : redirect})
+            # Perform regular login
+            user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return HttpResponseRedirect(redirect_to)
+        else:
+            return render(request, 'auth/login.html', {'wrongPassword': True, 'redirect': redirect_to})
+
+    return render(request, 'auth/login.html', {'redirect': redirect_to})
 
 
 def create_user_view(request):

@@ -1,6 +1,5 @@
 html {
   scroll-behavior: smooth;
-
 }
 
 body {
@@ -8,13 +7,13 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
-/* .mdl-layout {
-  height: calc(100vh - 115px) !important;
-} */
-
-.chat-content{
-  height: calc(100vh - 115px) !important;
+.mdl-layout {
+  height: calc(100vh - 105px) !important;
 }
+
+/* .chat-content{
+  height: calc(100% + 90px);
+} */
 
 .mdl-textfield__input {
   line-height: 2.5 !important;
@@ -80,7 +79,7 @@ body {
 }
 
 .input-send-div {
-  position: sticky;
+  position: fixed;
   bottom: 0;
   background-color: white !important;
   z-index: 1;

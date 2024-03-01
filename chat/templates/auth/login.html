@@ -1,9 +1,10 @@
-{% extends "master.html" %} {% block login%}
-
+{% extends "master.html" %} {% block login%} 
 {% if request.user.is_authenticated %}
 
-
-<p class="signin-signup mdl-card-center">You are already logged in. <a href="/chat/"><b>Click here</b></a> to read you messages</p>
+<p class="signin-signup mdl-card-center">
+  You are already logged in. <a href="/chat/"><b>Click here</b></a> to read you
+  messages
+</p>
 
 {% else %}
 <div class="mdl-card-center">
@@ -46,7 +47,9 @@
           >Password</label
         >
       </div>
-      <div class="mdl-card__actions mdl-card--border mdl-card-center-two-buttons">
+      <div
+        class="mdl-card__actions mdl-card--border mdl-card-center-two-buttons"
+      >
         <div>
           <button
             class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
@@ -54,22 +57,27 @@
           >
             Login
           </button>
+        </form>
         </div>
-        <div>
-          <button
-            class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
-            style="margin: 16px 0 0px"
-          >
-            Guest-Login
-          </button>
-        </div>
+        <form method="POST" class="mdl-card-center">
+          {% csrf_token %}
+          <input type="hidden" name="redirect" value="{{redirect}}" />
+          <input type="hidden" name="username" value="guestuser" /> <!-- Guest username -->
+          <input type="hidden" name="password" value="123456789!" /> <!-- Guest password -->
+          <div>
+            <button
+              class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+              style="margin: 16px 0 0px"
+            >
+              Guest-Login
+            </button>
+          </div>
+        </form>
       </div>
-    </form>
     <p class="signin-signup">
       New to Django Chat App? <a href="/register/"><b>Join now</b></a>
     </p>
   </div>
 </div>
 
-{% endif %}
-{% endblock %}
+{% endif %} {% endblock %}
