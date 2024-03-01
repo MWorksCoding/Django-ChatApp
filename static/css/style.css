@@ -93,6 +93,14 @@ body {
   text-align: end !important;
 }
 
+.mdl-layout__obfuscator.is-visible {
+  position: fixed !important;
+}
+
+.mdl-layout__drawer.is-visible{
+  position: fixed !important;
+}
+
 @media screen and (max-width:1200px) {}
 
 @media screen and (max-width:1000px) {}

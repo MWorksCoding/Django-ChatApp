@@ -8,19 +8,15 @@
     <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
     {% comment %} material lite : https://getmdl.io/started/index.html {% endcomment %}
-    {% comment %} die Variable request kann mann immer verwenden {% endcomment %}
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css" />
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <title>Chatroom</title>
   </head>
  <body> 
-   <!-- Uses a header that scrolls with the text, rather than staying
-  locked at the top -->
   <div class="mdl-layout mdl-js-layout">
     <header class="mdl-layout__header mdl-layout__header--scroll">
       <div class="mdl-layout__header-row" style="display: flex; align-items: center; justify-content: space-between;">
-        <!-- Title -->
         {% if request.user.is_authenticated %}
         <span class="mdl-layout-title">Welcome, {{ request.user.username }}</span>
         <span class="mdl-layout-title"><a href="/sign_out/"><b>Sign out</b></a></span>
@@ -40,7 +36,7 @@
         {% endblock %}
         {% block content%}
          {% endblock %}
-      </div>
+    </div>
     </main>
   </div>
   </body>

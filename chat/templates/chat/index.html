@@ -25,12 +25,8 @@
       </span>
     </div>
   </div>
-
 {% endif %} {% endfor %}
 </div>
-
-
-
 <script>
     function getFormattedDate() {
       const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -48,7 +44,6 @@
       formdata.append("csrfmiddlewaretoken", token);
       try{
         let formattedDate= getFormattedDate();
-        console.log('formattedDate' , formattedDate);
         messageContainer.innerHTML += `
         <div class="demo-card-square mdl-card mdl-shadow--2dp mdl-card-user" id="deleteMessage">
           <div class="mdl-card__supporting-text mdl-card-user-text">
@@ -61,18 +56,13 @@
           </div>
         </div>
         `;
-
-        console.log('messageContainer' , messageContainer);
         {% comment %} Fetch, what comes from the server {% endcomment %}
         let response = await fetch('/chat/', {
           method: 'POST',
           body: formdata
         });
-
         let json = await response.json();
         let jsonObject = JSON.parse(json);
-        console.log(json);
-        console.log(jsonObject);
         let message = jsonObject.fields.text;
         document.getElementById('deleteMessage').remove();
         messageContainer.innerHTML += `
