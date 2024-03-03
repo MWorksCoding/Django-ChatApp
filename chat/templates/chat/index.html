@@ -37,7 +37,7 @@
 
       return `${month}. ${day}, ${year}`;
   }
-    async function sendMessage() {
+    async function sendMessage(chat_name) {
       let formdata = new FormData();
       let token = "{{ csrf_token }}";
       formdata.append("textmessage", messageField.value);
@@ -57,7 +57,7 @@
         </div>
         `;
         {% comment %} Fetch, what comes from the server {% endcomment %}
-        let response = await fetch('/chat/', {
+        let response = await fetch(`/chat/${chat_name}`, {
           method: 'POST',
           body: formdata
         });
@@ -84,12 +84,10 @@
         console.error('An Error occured ', error)
     }
     }
-
-
 </script>
 
 <div class="mdl-card__actions mdl-card--border mdl-card-center input-send-div">
-  <form onsubmit="sendMessage(); return false;" method="POST">
+  <form onsubmit="sendMessage('{{ chat_name }}'); return false;" method="POST">
     {% csrf_token %}
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
       <input
