@@ -18,13 +18,24 @@
     <header class="mdl-layout__header mdl-layout__header--scroll">
       <div class="mdl-layout__header-row" style="display: flex; align-items: center; justify-content: space-between;">
         {% if request.user.is_authenticated %}
-        <span class="mdl-layout-title">Welcome, {{ request.user.username }}</span>
+        <span class="mdl-layout-title" style="margin-left: 16px">Welcome, {{ request.user.username }}</span>
         <span class="mdl-layout-title"><a href="/sign_out/"><b>Sign out</b></a></span>
         {% else %}
         <span class="mdl-layout-title">Django Chat App</span>
         {% endif %}
       </div>
     </header>
+    {% if request.user.is_authenticated %}
+    <div class="mdl-layout__drawer">
+      <span class="mdl-layout-title">Chatrooms</span>
+      <nav class="mdl-navigation">
+        <a class="mdl-navigation__link" href="/chat/django">Django</a>
+        <a class="mdl-navigation__link" href="/chat/news">News</a>
+        <a class="mdl-navigation__link" href="/chat/introduction">Introduction</a>
+        <a class="mdl-navigation__link" href="/chat/help">Help</a>
+      </nav>
+    </div>
+    {% endif %}
       <div>
         {% block login%}
         {% endblock %}
