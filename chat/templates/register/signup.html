@@ -1,13 +1,13 @@
 {% extends "master.html" %} {% block register%}
 <div class="mdl-card-center">
-  <h4>Make the most of your programmer life</h4>
+  <h4 class="ta-center">Make the most of your programmer life</h4>
   {% if registrationSucceded %}
   <script>
     setTimeout(function () {
       window.location.href = "/login/";
     }, 5000);
   </script>
-  <p>
+  <p class="ta-center">
     Thank you for registering, please log in again.<br />
     You will be redirected to the login page in 5 seconds.
   </p>
@@ -15,16 +15,16 @@
     class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"
   ></div>
   {%else%} {% if usernameAlreadyExists %}
-  <p class="warning-message">
+  <p class="warning-message ta-center">
     Username already exits, please choose another one
   </p>
   {% endif %} {% if emailAlreadyExists %}
-  <p class="warning-message">
+  <p class="warning-message ta-center">
     Email adress is already registered, did you forget your password?
     <a href="/password_reset/"><b>Click here</b></a>
   </p>
   {% endif %} {% if passwordMismatch %}
-  <p class="warning-message">Both passwords do not match, please try again</p>
+  <p class="warning-message ta-center">Both passwords do not match, please try again</p>
   {% endif %}
 
   <div class="demo-card-square mdl-card mdl-shadow--2dp mdl-card-center">

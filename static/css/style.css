@@ -97,16 +97,16 @@ body {
   position: fixed !important;
 }
 
-.mdl-layout__drawer.is-visible{
+.mdl-layout__drawer.is-visible {
   position: fixed !important;
 }
 
-@media screen and (max-width:1200px) {}
+.ta-center {
+  text-align: center
+}
 
-@media screen and (max-width:1000px) {}
-
-@media screen and (max-width:800px) {}
-
-@media screen and (max-width:600px) {}
-
-@media screen and (max-width:400px) {}
+@media screen and (max-width: 1024px){
+  .mdl-layout__header {
+    display: flex !important
+  }
+}
