@@ -7,7 +7,14 @@ from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.core import serializers
 
+"""
+View function for the chat index page.
 
+:param request: HTTP request object.
+:type request: django.http.HttpRequest
+:return: HTTP response with chat index page.
+:rtype: django.http.HttpResponse
+"""
 @login_required(login_url='/login/')#redirect if not logged in
 def index(request):  
     
@@ -40,6 +47,15 @@ def index(request):
     chatMessages = Message.objects.filter(chat__id=chat_object)
     return render(request, 'chat/index.html', {'messages': chatMessages, 'chat_name' : chat_name })
 
+
+"""
+View function for handling user login.
+
+:param request: HTTP request object.
+:type request: django.http.HttpRequest
+:return: HTTP response for the login view.
+:rtype: django.http.HttpResponse
+"""
 def login_view(request):
     redirect_to = request.GET.get('next', '/chat/django')  # Default redirect URL after login
     if request.method == 'POST':
@@ -57,6 +73,14 @@ def login_view(request):
     return render(request, 'auth/login.html', {'redirect': redirect_to})
 
 
+"""
+View function for handling user registration.
+
+:param request: HTTP request object.
+:type request: django.http.HttpRequest
+:return: HTTP response for the user registration view.
+:rtype: django.http.HttpResponse
+"""
 def create_user_view(request):
     if request.method == 'POST':
         new_username = request.POST.get('username')
@@ -75,6 +99,14 @@ def create_user_view(request):
     return render(request, 'register/signup.html')
 
 
+"""
+View function for handling password reset requests.
+
+:param request: HTTP request object.
+:type request: django.http.HttpRequest
+:return: HTTP response for the password reset view.
+:rtype: django.http.HttpResponse
+"""
 def password_reset(request):
     if request.method == 'POST':
         password_reset_email = request.POST.get('email') 
@@ -84,6 +116,15 @@ def password_reset(request):
             return render(request, 'register/password_reset.html', {'newPassword': True})   
     return render(request, 'register/password_reset.html')
 
+
+"""
+View function for handling user logout.
+
+:param request: HTTP request object.
+:type request: django.http.HttpRequest
+:return: HTTP response for the user logout view.
+:rtype: django.http.HttpResponse
+"""
 def sign_out(request):
     logout(request)
     return render(request, 'auth/sign_out.html')
